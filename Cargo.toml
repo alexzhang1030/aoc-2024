@@ -1,0 +1,15 @@
+[package]
+edition    = "2021"
+license    = "MIT"
+name       = "aoc-2024"
+private    = true
+repository = "https://github.com/rustaceans-on-beach/rust-starter"
+version    = "0.0.0"
+
+[dependencies]
+
+[dev-dependencies]
+rusty-hook = "^0.11.2"
+
+[package.metadata.cargo-shear]
+ignored = ["rusty-hook"]
