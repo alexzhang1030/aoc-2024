@@ -49,12 +49,20 @@ fn is_valid(numbers: &[i32]) -> bool {
     }
     let num = numbers[i];
     let previous_num = numbers[i - 1];
+    // 1. ensure numbers are all increasing or all decreasing
+    if num == previous_num {
+      return false;
+    }
     if i == 1 {
-      if num == previous_num {
+      // 2.0, let's determine it's direction
+      increasing = num > previous_num;
+    } else {
+      // 2.1 ensure direction is consistent
+      if (num > previous_num) != increasing {
         return false;
       }
-      increasing = num > previous_num;
     }
+    // 3. Ensure any two adjacent levels differ by at least one and at most three.
     let differ = if increasing { num - previous_num } else { previous_num - num };
     if !(1..=3).contains(&differ) {
       return false;
