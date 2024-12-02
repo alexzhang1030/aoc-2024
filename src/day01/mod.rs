@@ -80,7 +80,7 @@ fn from_str() -> Result<(Vec<i32>, Vec<i32>), String> {
   let mut right = Vec::new();
 
   for line in text.lines() {
-    let mut parts = line.split_whitespace();
+    let mut parts = line.split_ascii_whitespace();
     let l = parts.next().ok_or_else(|| format!("Missing left part in line: {}", line))?;
     let r = parts.next().ok_or_else(|| format!("Missing right part in line: {}", line))?;
     left.push(l.parse::<i32>().map_err(|e| format!("Invalid number '{}': {}", l, e))?);
