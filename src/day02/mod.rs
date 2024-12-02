@@ -24,19 +24,42 @@
 ///
 /// Answer: 2, only two lines are valid
 #[allow(dead_code)]
-fn day02() -> usize {
+fn day02_part1() -> usize {
+  let list = from_str();
+  list.iter().filter(|numbers| is_valid(numbers)).count()
+}
+
+/// Part two
+/// All part one rules are still applicable
+/// Additionally:
+/// - If removes one number from the list, the list will be valid, then that this list is valid
+///
+/// Example above:
+/// - `7 6 4 2 1` Valid, all decreasing and differ by at most 3
+/// - `1 2 7 8 9` Invalid, `2 -> 7` differ by 5
+/// - `9 7 6 2 1` Invalid, `6 -> 2` differ by 4
+/// - `1 3 2 4 5` Valid, removes `2` then it's valid
+/// - `8 6 4 4 1` Valid, removes `4` then it's valid
+/// - `1 3 6 7 9` Valid, all increasing and differ by at most 3
+///
+/// Answer: 2, only two lines are valid
+#[allow(dead_code)]
+fn day02_part2() -> usize {
+  let list = from_str();
+  list.iter().filter(|numbers| is_valid_part2(numbers)).count()
+}
+
+fn from_str() -> Vec<Vec<i32>> {
   let text = include_str!("./input.txt");
-  let list: Vec<Vec<i32>> = text
+  text
     .lines()
     .map(|line| {
       line
-        .split_whitespace()
+        .split_ascii_whitespace()
         .map(|n| n.parse::<i32>().expect("Faced invalid number"))
-        .collect::<Vec<i32>>() // 收集每行的数字
+        .collect::<Vec<i32>>()
     })
-    .collect();
-
-  list.iter().filter(|numbers| is_valid(numbers)).count()
+    .collect()
 }
 
 fn is_valid(numbers: &[i32]) -> bool {
@@ -72,13 +95,36 @@ fn is_valid(numbers: &[i32]) -> bool {
   true
 }
 
+fn is_valid_part2(numbers: &[i32]) -> bool {
+  let result = is_valid(numbers);
+  if result {
+    return true;
+  }
+  // Remove one number from the list
+  // and check if the list is valid
+  for i in 0..numbers.len() {
+    let mut new_numbers = numbers.to_vec();
+    new_numbers.remove(i);
+    if is_valid(&new_numbers) {
+      return true;
+    }
+  }
+  false
+}
+
 #[cfg(test)]
 mod test {
-  use super::day02;
+  use super::{day02_part1, day02_part2};
 
   #[test]
-  fn test_day02() {
-    let res = day02();
+  fn test_day02_part1() {
+    let res = day02_part1();
     assert_eq!(res, 472);
+  }
+
+  #[test]
+  fn test_day02_part2() {
+    let res = day02_part2();
+    assert_eq!(res, 520);
   }
 }
