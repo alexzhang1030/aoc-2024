@@ -6,6 +6,7 @@ repository = "https://github.com/rustaceans-on-beach/rust-starter"
 version    = "0.0.0"
 
 [dependencies]
+regex = "1.11.1"
 
 [dev-dependencies]
 rusty-hook = "^0.11.2"
