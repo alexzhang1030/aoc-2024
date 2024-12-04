@@ -98,7 +98,9 @@ fn day04_part2() -> i32 {
     if r == 0 || c == 0 || r + 1 >= rows || c + 1 >= cols {
       return false;
     }
+
     let center = grid[r][c];
+
     if center != 'A' {
       return false;
     }
