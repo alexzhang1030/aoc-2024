@@ -98,16 +98,15 @@ fn day04_part2() -> i32 {
     if r == 0 || c == 0 || r + 1 >= rows || c + 1 >= cols {
       return false;
     }
-
-    let top_left = grid[r - 1][c - 1];
-    let top_right = grid[r - 1][c + 1];
     let center = grid[r][c];
-    let bottom_left = grid[r + 1][c - 1];
-    let bottom_right = grid[r + 1][c + 1];
-
     if center != 'A' {
       return false;
     }
+
+    let top_left = grid[r - 1][c - 1];
+    let top_right = grid[r - 1][c + 1];
+    let bottom_left = grid[r + 1][c - 1];
+    let bottom_right = grid[r + 1][c + 1];
 
     is_pattern(&top_left, &bottom_right) && is_pattern(&top_right, &bottom_left)
   };
