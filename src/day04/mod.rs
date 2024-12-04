@@ -115,7 +115,6 @@ fn day04_part2() -> i32 {
   for r in 0..rows {
     for c in 0..cols {
       if is_x_mas(r, c) {
-        println!("Found X-MAS at row: {}, col: {}", r, c);
         count += 1;
       }
     }
